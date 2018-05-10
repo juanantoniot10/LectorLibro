@@ -3,6 +3,8 @@ package controlAccion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -13,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
 import controlLogica.Logica;
+import javazoom.jl.player.Player;
 import vita.PanelInicio;
 import vita.PanelLectura;
 
@@ -25,6 +28,7 @@ public class ListenerBotonRuta implements ActionListener{
 	private PanelInicio panelInicio;
 	private PanelLectura panelLectura;
 	private ListenerMarcador listenerMarcarPagina;
+	private ListenerRetroceso listenerRetroceso;
 	
 	
 	public ListenerBotonRuta(Logica logica, Actualizador actualizador,PanelInicio panelInicio,
@@ -35,25 +39,24 @@ public class ListenerBotonRuta implements ActionListener{
 		this.panelInicio = panelInicio;
 		this.panelLectura = panelLectura;
 		this.listenerMarcarPagina = new ListenerMarcador(panelLectura, actualizador);
+		this.listenerRetroceso = new ListenerRetroceso(panelInicio,actualizador,panelLectura);
+		this.panelLectura.getMarcarPagina().addActionListener(listenerMarcarPagina);
+		this.panelLectura.getSalir().addActionListener(listenerRetroceso);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.ruta = String.valueOf("audio/sonidoLibroAbriendo");
+		this.ruta = String.valueOf("audios/abrirLibro.mp3");
 		try {
-			sonido = AudioSystem.getClip();
-			File a = new File(ruta);
-			sonido.open(AudioSystem.getAudioInputStream(a));
-			sonido.start();
+			Player reproductor = new Player(new FileInputStream(ruta));
+			reproductor.play();
 			}
 		catch (Exception tipoerror) {
 			System.out.println("" + tipoerror);
 		}
-		JPanel inicioParent = (JPanel) panelInicio.getParent();
-		inicioParent.removeAll();
-		inicioParent.add(panelLectura);
+		this.panelInicio.getParent().add(this.panelLectura);
+		this.panelLectura.getParent().remove(panelInicio);
 		this.actualizador.actualizar();
-		this.panelLectura.getMarcarPagina().addActionListener(listenerMarcarPagina);	
 	}
 		
 }

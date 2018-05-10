@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controlLogica.Logica;
+import vita.PanelInicio;
 import vita.PanelLectura;
 import vita.VistaPrincipal;
 
@@ -23,11 +24,10 @@ public class Puente extends VistaPrincipal{
 	public Puente() {
 		super();
 		this.logica = new Logica();
-		this.panelLectura = new PanelLectura();
 		this.actualizador = new Actualizador((JPanel) this.panelInicio.getParent());
+		this.panelLectura = new PanelLectura();
 		this.listenerBotonRuta = new ListenerBotonRuta(this.logica,this.actualizador,this.panelInicio,this.panelLectura);
 //		this.listenerBusqueda = new ListenerBusqueda(panelBotonesCanciones,listenerBotonRuta,this.textoNombreCancion,this.textoRutaUsuario);
-//		this.panelImagen.add(new JLabel(this.logica.getImagenReproductor()));
 //		this.panelInicio.getTxtElHobbit().addActionListener(listenerBusqueda);
 //		this.panelInicio.getTxtCuserstuusuarioalgoalgo().addActionListener(listenerBusqueda);
 		File carpetaLibros = new File("libros");
