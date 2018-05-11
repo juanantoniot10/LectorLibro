@@ -27,9 +27,8 @@ public class PanelLectura extends JPanel{
 	private JButton botonMusica;
 	private JLabel numeroPaginaDer;
 	private JLabel numeroPaginaIzq;
-	private JLabel lblMuchoTextoMucho;
 	private JTextPane textPaneLeft;
-	private JTextPane textPaneTop;
+	private JTextPane textPaneDer;
 	public PanelLectura() {
 		setMinimumSize(new Dimension(650, 500));
 		setLayout(null);
@@ -136,11 +135,11 @@ public class PanelLectura extends JPanel{
 		textPaneLeft.setText("Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego");
 		add(textPaneLeft);
 		
-		textPaneTop = new JTextPane();
-		textPaneTop.setText("Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego");
-		textPaneTop.setOpaque(false);
-		textPaneTop.setBounds(424, 61, 240, 322);
-		add(textPaneTop);
+		textPaneDer = new JTextPane();
+		textPaneDer.setText("Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego");
+		textPaneDer.setOpaque(false);
+		textPaneDer.setBounds(424, 61, 240, 322);
+		add(textPaneDer);
 		
 		panelImagen = new JPanel();
 		panelImagen.setBounds(73, 22, 665, 415);
@@ -188,4 +187,20 @@ public class PanelLectura extends JPanel{
 	public JLabel getImagenMarcar() {
 		return imagenMarcar;
 	}
+	public JButton getBotonMusica() {
+		return botonMusica;
+	}
+	public JLabel getNumeroPaginaDer() {
+		return numeroPaginaDer;
+	}
+	public JLabel getNumeroPaginaIzq() {
+		return numeroPaginaIzq;
+	}
+	public JTextPane getTextPaneLeft() {
+		return textPaneLeft;
+	}
+	public JTextPane getTextPaneDer() {
+		return textPaneDer;
+	}
+	
 }

@@ -55,12 +55,10 @@ public class ListenerBotonRuta implements ActionListener{
 		}
 		this.panelInicio.getParent().add(this.panelLectura);
 		this.panelLectura.getParent().remove(panelInicio);
-		this.panelLectura.getTituloLibro().setText(extrarTitulo(((JButton)e.getSource()).getText()));
+		this.panelLectura.getTituloLibro().setText(logica.extraerTitulo(((JButton)e.getSource()).getName()));
+		this.panelLectura.getTextPaneLeft().setText(logica.obtenerTexto(0,new File(((JButton)e.getSource()).getName())));
+		this.panelLectura.getTextPaneDer().setText(logica.obtenerTexto(1,new File (((JButton)e.getSource()).getName())));
 		this.actualizador.actualizar();
 	}
 
-	private String extrarTitulo(String textoBoton) {
-		return textoBoton.substring(0,textoBoton.lastIndexOf("."));
-	}
-		
 }

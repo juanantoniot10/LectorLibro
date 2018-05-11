@@ -32,11 +32,11 @@ public class Puente extends VistaPrincipal{
 //		this.panelInicio.getTxtCuserstuusuarioalgoalgo().addActionListener(listenerBusqueda);
 		File carpetaLibros = new File("libros");
 		for (int i = 0; i <carpetaLibros.listFiles().length ; i++) {
-			JButton nuevoBoton = new JButton(carpetaLibros.listFiles()[i].getName());
+			JButton nuevoBoton = new JButton(logica.extraerTitulo(String.valueOf(carpetaLibros.listFiles()[i].getPath())));
+			nuevoBoton.setName(carpetaLibros.listFiles()[i].getPath());
 			nuevoBoton.setMaximumSize(new Dimension(200, 15));
 			nuevoBoton.addActionListener(listenerBotonRuta);
 			this.panelInicio.getPanelResultado().add(nuevoBoton);
 		}
 	}
-	
 }
