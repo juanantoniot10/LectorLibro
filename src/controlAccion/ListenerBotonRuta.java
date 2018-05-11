@@ -21,10 +21,9 @@ import vita.PanelLectura;
 
 public class ListenerBotonRuta implements ActionListener{
 
-	private String ruta;
+	private String rutaAudio;
 	private Logica logica;
 	private Actualizador actualizador;
-	private Clip sonido;
 	private PanelInicio panelInicio;
 	private PanelLectura panelLectura;
 	private ListenerMarcador listenerMarcarPagina;
@@ -46,9 +45,9 @@ public class ListenerBotonRuta implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.ruta = String.valueOf("audios/abrirLibro.mp3");
+		this.rutaAudio = String.valueOf("audios/abrirLibro.mp3");
 		try {
-			Player reproductor = new Player(new FileInputStream(ruta));
+			Player reproductor = new Player(new FileInputStream(rutaAudio));
 			reproductor.play();
 			}
 		catch (Exception tipoerror) {
@@ -56,7 +55,12 @@ public class ListenerBotonRuta implements ActionListener{
 		}
 		this.panelInicio.getParent().add(this.panelLectura);
 		this.panelLectura.getParent().remove(panelInicio);
+		this.panelLectura.getTituloLibro().setText(extrarTitulo(((JButton)e.getSource()).getText()));
 		this.actualizador.actualizar();
+	}
+
+	private String extrarTitulo(String textoBoton) {
+		return textoBoton.substring(0,textoBoton.lastIndexOf("."));
 	}
 		
 }

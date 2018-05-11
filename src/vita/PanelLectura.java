@@ -9,6 +9,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
+import java.awt.Color;
+import javax.swing.JTextPane;
 
 public class PanelLectura extends JPanel{
 	private JLabel tituloLibro;
@@ -23,36 +25,39 @@ public class PanelLectura extends JPanel{
 	private JLabel imagenNormal;
 	private JLabel imagenMarcar;
 	private JButton botonMusica;
+	private JLabel numeroPaginaDer;
+	private JLabel numeroPaginaIzq;
+	private JLabel lblMuchoTextoMucho;
+	private JTextPane textPaneLeft;
+	private JTextPane textPaneTop;
 	public PanelLectura() {
-		setLayout(new BorderLayout(0, 0));
+		setMinimumSize(new Dimension(650, 500));
+		setLayout(null);
 		
 		tituloLibro = new JLabel("Titulo Libro");
+		tituloLibro.setBounds(0, 0, 738, 22);
+		tituloLibro.setOpaque(true);
+		tituloLibro.setForeground(Color.ORANGE);
+		tituloLibro.setBackground(Color.BLACK);
 		tituloLibro.setHorizontalAlignment(SwingConstants.CENTER);
 		tituloLibro.setFont(new Font("Harrington", Font.BOLD, 18));
-		add(tituloLibro, BorderLayout.NORTH);
-		
-		panelImagen = new JPanel();
-		add(panelImagen, BorderLayout.CENTER);
+		add(tituloLibro);
 		
 		ImageIcon imagen = new ImageIcon("img/paginaNormal.jpg");
-		imagenNormal = new JLabel(imagen);
-		imagenNormal.setName("normal");
-		imagenNormal.setMinimumSize(new Dimension(200, 200));
-		imagenNormal.setMaximumSize(new Dimension(1000, 700));
-		panelImagen.add(imagenNormal);
 		
 		ImageIcon imagenMarcado = new ImageIcon("img/marcarPagina.jpg");
 		imagenMarcar = new JLabel(imagenMarcado);
-		imagenNormal.setName("marcar");
-		imagenMarcar.setMinimumSize(new Dimension(200, 200));
-		imagenMarcar.setMaximumSize(new Dimension(1000, 700));
-		
-		
+		imagenMarcar.setBounds(0, 0, 665, 415);
+		imagenMarcar.setMinimumSize(new Dimension(612, 419));
+		imagenMarcar.setMaximumSize(new Dimension(612, 419));
+		imagenMarcar.setName("marcar");
 		
 		JPanel panelBotones = new JPanel();
+		panelBotones.setBounds(0, 22, 73, 415);
+		panelBotones.setBackground(Color.BLACK);
 		panelBotones.setMinimumSize(new Dimension(70, 10));
 		panelBotones.setMaximumSize(new Dimension(70, 32767));
-		add(panelBotones, BorderLayout.WEST);
+		add(panelBotones);
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
 		
 		retrocederPaginax10 = new JButton("X10");
@@ -110,6 +115,45 @@ public class PanelLectura extends JPanel{
 		salir.setMaximumSize(new Dimension(90, 40));
 		salir.setIcon(new ImageIcon(PanelLectura.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
 		panelBotones.add(salir);
+		
+		numeroPaginaIzq = new JLabel("1");
+		numeroPaginaIzq.setBounds(140, 386, 34, 22);
+		add(numeroPaginaIzq);
+		numeroPaginaIzq.setHorizontalAlignment(SwingConstants.CENTER);
+		numeroPaginaIzq.setForeground(Color.BLACK);
+		numeroPaginaIzq.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
+		numeroPaginaDer = new JLabel("2");
+		numeroPaginaDer.setBounds(638, 386, 34, 22);
+		add(numeroPaginaDer);
+		numeroPaginaDer.setHorizontalAlignment(SwingConstants.CENTER);
+		numeroPaginaDer.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numeroPaginaDer.setForeground(Color.BLACK);
+		
+		textPaneLeft = new JTextPane();
+		textPaneLeft.setOpaque(false);
+		textPaneLeft.setBounds(156, 61, 240, 322);
+		textPaneLeft.setText("Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego");
+		add(textPaneLeft);
+		
+		textPaneTop = new JTextPane();
+		textPaneTop.setText("Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego");
+		textPaneTop.setOpaque(false);
+		textPaneTop.setBounds(424, 61, 240, 322);
+		add(textPaneTop);
+		
+		panelImagen = new JPanel();
+		panelImagen.setBounds(73, 22, 665, 415);
+		panelImagen.setBackground(Color.BLACK);
+		add(panelImagen);
+		panelImagen.setLayout(null);
+		imagenNormal = new JLabel(imagen);
+		imagenNormal.setBounds(0, 0, 665, 415);
+		imagenNormal.setName("normal");
+		imagenNormal.setMinimumSize(new Dimension(612, 419));
+		imagenNormal.setMaximumSize(new Dimension(612, 419));
+		panelImagen.add(imagenNormal);
+		imagenNormal.setName("marcar");
 	}
 	public JLabel getTituloLibro() {
 		return tituloLibro;
@@ -144,6 +188,4 @@ public class PanelLectura extends JPanel{
 	public JLabel getImagenMarcar() {
 		return imagenMarcar;
 	}
-	
-
 }

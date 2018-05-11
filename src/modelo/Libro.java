@@ -10,7 +10,7 @@ public class Libro implements Legible{
 	public Libro() {
 		super();
 		lectura = "ruta al archivo";
-		paginas = new ArrayList<>();
+		paginas = new ArrayList<Pagina>();
 	}
 	@Override
 	public void avanzarPagina() {
