@@ -1,18 +1,15 @@
 package controlLogica;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
 import utiles.Constantes;
 
 public class Logica {
 	private ImageIcon imagenLibroNormal;
 	private String palabraPartidaFinal="";
+	private File ruta;
 	
 	public Logica() {
 		super();
@@ -31,11 +28,11 @@ public class Logica {
 		return this.imagenLibroNormal;
 	}
 
-	public String obtenerTexto(int numeroPagina,File ruta) {
+	public String obtenerTexto(int numeroPagina) {
 		if (ruta.exists()) {
 			try {
 				palabraPartidaFinal = "";
-				return generarPagina(ruta,numeroPagina);
+				return generarPagina(numeroPagina);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -49,7 +46,7 @@ public class Logica {
 	 * @return
 	 * @throws IOException
 	 */
-	private String generarPagina(File ruta, int numeroPagina) throws IOException {
+	private String generarPagina(int numeroPagina) throws IOException {
 		FileReader flujoR = new FileReader(ruta);
 		char[] letras = null;
 		for (int i = 0; i < numeroPagina+1; i++) {
@@ -62,11 +59,52 @@ public class Logica {
 			}
 		}
 		flujoR.close();
-		if(palabraPartidaFinal!="")return palabraPartidaFinal+new String(letras);
-		else if (comprobarPalabraFinalRota(letras)) {
-			return borrarPalabraPartida(letras);
+		return ponerSaltoDeLineaEnTitulo(reemplazarSaltosDeLinea(generearPaginaSegunPalabraPartida(letras)));
+	}
+
+	private String ponerSaltoDeLineaEnTitulo(String reemplazarSaltosDeLinea) {
+		int contadorMayusculas =0;
+		int masDeDosEspacios=0;
+		for (int i = 0; i < reemplazarSaltosDeLinea.length(); i++) {
+			if(Character.isUpperCase((char)reemplazarSaltosDeLinea.charAt(i))&&masDeDosEspacios>1){
+				contadorMayusculas++;
+			}
+			else if (!Character.isAlphabetic((char)reemplazarSaltosDeLinea.charAt(i))) {
+				masDeDosEspacios++;
+			}
+			else if(contadorMayusculas>2 && masDeDosEspacios > 1) {
+				reemplazarSaltosDeLinea = new String(aniadirSaltoEn(i-2,reemplazarSaltosDeLinea));
+				contadorMayusculas=0;
+				masDeDosEspacios =0;
+			}
+			else {
+				contadorMayusculas = 0;
+				masDeDosEspacios = 0;
+			}
 		}
-		else return new String(letras);
+		return reemplazarSaltosDeLinea;
+	}
+
+	private String aniadirSaltoEn(int i, String reemplazarSaltosDeLinea) {
+		String aux = new String(reemplazarSaltosDeLinea);
+		String division= new String(aux.substring(0, i)+"\n");
+		return new String(division+reemplazarSaltosDeLinea.substring(i+1));
+	}
+
+	private String reemplazarSaltosDeLinea(String generearPaginaSegunPalabraPartida) {
+		return new String(generearPaginaSegunPalabraPartida.replaceAll("\r", ".").replaceAll("\n", " "));
+	}
+
+	/**
+	 * @param letras
+	 * @return
+	 */
+	private String generearPaginaSegunPalabraPartida(char[] letras) {
+		if(palabraPartidaFinal!="")return new String((palabraPartidaFinal+new String(letras)));
+		else if (comprobarPalabraFinalRota(letras)) {
+			return new String(borrarPalabraPartida(letras));
+		}
+		else return new String(new String(letras));
 	}
 
 	private String borrarPalabraPartida(char[] letras) {
@@ -89,6 +127,9 @@ public class Logica {
 	public String extraerTitulo(String nameBoton) {
 		return nameBoton.substring(nameBoton.lastIndexOf("\\")+1,nameBoton.lastIndexOf("."));
 	}
-	
+
+	public void setRuta(File ruta) {
+		this.ruta = ruta;
+	}
 	
 }

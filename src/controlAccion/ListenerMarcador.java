@@ -1,16 +1,10 @@
 package controlAccion;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.io.FileInputStream;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
 import javazoom.jl.player.Player;
 import vita.PanelLectura;
 
