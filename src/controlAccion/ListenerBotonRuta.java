@@ -20,6 +20,7 @@ public class ListenerBotonRuta implements ActionListener{
 	private ListenerMarcador listenerMarcarPagina;
 	private ListenerRetroceso listenerRetroceso;
 	private ListenerAvanzarPagina avanzarPagina;
+	private ListenerRetrocederPagina retrocederPagina;
 	
 	
 	public ListenerBotonRuta(Logica logica, Actualizador actualizador,PanelInicio panelInicio,
@@ -35,6 +36,8 @@ public class ListenerBotonRuta implements ActionListener{
 		this.panelLectura.getSalir().addActionListener(listenerRetroceso);
 		this.avanzarPagina = new ListenerAvanzarPagina(this.panelLectura,actualizador,logica);
 		this.panelLectura.getAvanzarPagina().addActionListener(avanzarPagina);
+		this.retrocederPagina = new ListenerRetrocederPagina(panelLectura, actualizador, logica);
+		this.panelLectura.getRetrocederPagina().addActionListener(retrocederPagina);
 	}
 
 	@Override
