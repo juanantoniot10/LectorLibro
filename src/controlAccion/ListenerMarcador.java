@@ -34,14 +34,23 @@ public class ListenerMarcador implements ActionListener{
 	private void marcarPagina() {
 		if(comprobarImagenActual()){
 			desmarcar();
+			
 		}
 		else {
 			marcar();
 		}
-		guardarPaginaMarcadaEnLogica();
+		
 		cambiarVisivilidadNumeroPagina();
 		cambiarVisivilidadNumeroPaginaCuandoMarcada();
+		ponerTextoEnMarcada();	
 		this.actualizador.actualizar();
+	}
+
+	/**
+	 * 
+	 */
+	private void ponerTextoEnMarcada() {
+		this.panelLectura.getNumeroPaginaCuandoMarcada().setText(String.valueOf(this.logica.getPaginaMarcada()+2));
 	}
 
 	/**
@@ -57,6 +66,7 @@ public class ListenerMarcador implements ActionListener{
 	private void marcar() {
 		anadirImagen(this.panelLectura.getImagenMarcar());
 		reproducirAudio("audios/marcarPagina.mp3");
+		this.logica.setPaginaMarcada(Integer.valueOf(this.panelLectura.getNumeroPaginaDer().getText()).intValue());
 	}
 
 	/**
@@ -65,6 +75,7 @@ public class ListenerMarcador implements ActionListener{
 	private void desmarcar() {
 		anadirImagen(this.panelLectura.getImagenNormal());
 		reproducirAudio("audios/desmarcarPagina.mp3");
+		this.logica.setPaginaMarcada(-1);
 	}
 
 	/**
@@ -90,14 +101,6 @@ public class ListenerMarcador implements ActionListener{
 		this.panelLectura.getNumeroPaginaDer().setVisible(!this.panelLectura.getNumeroPaginaDer().isVisible());
 	}
 
-	/**
-	 * 
-	 */
-	private void guardarPaginaMarcadaEnLogica() {
-		if(Integer.valueOf(this.panelLectura.getNumeroPaginaDer().getText()).intValue()!=this.logica.getPaginaMarcada())
-			this.logica.setPaginaMarcada(Integer.valueOf(this.panelLectura.getNumeroPaginaDer().getText()).intValue());
-		else this.logica.setPaginaMarcada(0);
-	}
 
 	/**
 	 * 

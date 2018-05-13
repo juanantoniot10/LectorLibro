@@ -99,6 +99,7 @@ public class PanelLectura extends JPanel{
 		panelBotones.add(marcarPagina);
 		
 		irPaginaMarcada = new JButton("");
+		irPaginaMarcada.setName("0");
 		irPaginaMarcada.setToolTipText("ir a pagina marcada");
 		irPaginaMarcada.setMinimumSize(new Dimension(90, 20));
 		irPaginaMarcada.setMaximumSize(new Dimension(90, 40));

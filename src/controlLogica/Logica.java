@@ -8,9 +8,8 @@ import utiles.Constantes;
 
 public class Logica {
 	private ImageIcon imagenLibroNormal;
-	private String palabraPartidaFinal="";
 	private File ruta;
-	private int paginaMarcada = 0;
+	private int paginaMarcada = -1;
 	
 	public Logica() {
 		super();
@@ -32,7 +31,6 @@ public class Logica {
 	public String obtenerTexto(int numeroPagina) {
 		if (ruta.exists()) {
 			try {
-				palabraPartidaFinal = "";
 				return generarPagina(numeroPagina);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -50,14 +48,9 @@ public class Logica {
 	private String generarPagina(int numeroPagina) throws IOException {
 		FileReader flujoR = new FileReader(ruta);
 		char[] letras = null;
-		for (int i = 0; i < numeroPagina+1; i++) {
+		for (int i = 0; i < numeroPagina; i++) {
 			letras = new char[Constantes.CARACTERESPAGINA];
 			flujoR.read(letras);
-			if(i==numeroPagina-1) {
-				if(comprobarPalabraFinalRota(letras)) {
-					obtenerPalabraPerdida(letras);
-				}
-			}
 		}
 		flujoR.close();
 		return ponerSaltoDeLineaEnTitulo(reemplazarSaltosDeLinea(generearPaginaSegunPalabraPartida(letras)));
@@ -101,29 +94,9 @@ public class Logica {
 	 * @return
 	 */
 	private String generearPaginaSegunPalabraPartida(char[] letras) {
-		if(palabraPartidaFinal!="")return new String((palabraPartidaFinal+new String(letras)));
-		else if (comprobarPalabraFinalRota(letras)) {
-			return new String(borrarPalabraPartida(letras));
-		}
-		else return new String(new String(letras));
+		return new String(new String(letras));
 	}
 
-	private String borrarPalabraPartida(char[] letras) {
-		return new String(letras).substring(0, new String (letras).lastIndexOf(' '));
-	}
-
-	/**
-	 * @param letras
-	 * @return
-	 */
-	private boolean comprobarPalabraFinalRota(char[] letras) {
-		return letras[letras.length-1]!='.'&&letras[letras.length-1]!=' '&&letras[letras.length-1]!='\n' && letras[letras.length-1]!='\r';
-	}
-
-	private void obtenerPalabraPerdida(char[] letras) {
-		String aux = new String(letras);
-		this.palabraPartidaFinal = new String (aux.substring(aux.lastIndexOf(' ')));
-	}
 
 	public String extraerTitulo(String nameBoton) {
 		return nameBoton.substring(nameBoton.lastIndexOf("\\")+1,nameBoton.lastIndexOf("."));

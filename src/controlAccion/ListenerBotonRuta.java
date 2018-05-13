@@ -19,7 +19,7 @@ public class ListenerBotonRuta implements ActionListener{
 	private PanelLectura panelLectura;
 	private ListenerMarcador listenerMarcarPagina;
 	private ListenerRetroceso listenerRetroceso;
-	private ListenerAvanzarPagina cambiarPagina;
+	private CambiarPagina cambiarPagina;
 	
 	
 	public ListenerBotonRuta(Logica logica, Actualizador actualizador,PanelInicio panelInicio,
@@ -33,11 +33,14 @@ public class ListenerBotonRuta implements ActionListener{
 		this.listenerRetroceso = new ListenerRetroceso(panelInicio,actualizador,panelLectura);
 		this.panelLectura.getMarcarPagina().addActionListener(listenerMarcarPagina);
 		this.panelLectura.getSalir().addActionListener(listenerRetroceso);
-		this.cambiarPagina = new ListenerAvanzarPagina(this.panelLectura,actualizador,logica);
+		this.cambiarPagina = new CambiarPagina(this.panelLectura,actualizador,logica);
 		this.panelLectura.getAvanzarPagina().addActionListener(cambiarPagina);
 		this.panelLectura.getRetrocederPagina().addActionListener(cambiarPagina);
 		this.panelLectura.getRetrocederPaginax10().addActionListener(cambiarPagina);
 		this.panelLectura.getAvanzarPaginax10().addActionListener(cambiarPagina);
+		this.panelLectura.getIrPaginaMarcada().addActionListener(cambiarPagina);
+		Reproductor ListenerMusica = new Reproductor();
+		this.panelLectura.getBotonMusica().addActionListener(ListenerMusica);
 	}
 
 	@Override
@@ -54,8 +57,8 @@ public class ListenerBotonRuta implements ActionListener{
 		this.panelInicio.getParent().add(this.panelLectura);
 		this.panelLectura.getParent().remove(panelInicio);
 		this.panelLectura.getTituloLibro().setText(logica.extraerTitulo(((JButton)e.getSource()).getName()));
-		this.panelLectura.getTextPaneLeft().setText(logica.obtenerTexto(0));
-		this.panelLectura.getTextPaneDer().setText(logica.obtenerTexto(1));
+		this.panelLectura.getTextPaneLeft().setText(logica.obtenerTexto(1));
+		this.panelLectura.getTextPaneDer().setText(logica.obtenerTexto(2));
 		this.actualizador.actualizar();
 	}
 
