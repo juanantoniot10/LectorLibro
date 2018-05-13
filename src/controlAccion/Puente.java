@@ -34,7 +34,7 @@ public class Puente extends VistaPrincipal{
 		for (int i = 0; i <carpetaLibros.listFiles().length ; i++) {
 			JButton nuevoBoton = new JButton(logica.extraerTitulo(String.valueOf(carpetaLibros.listFiles()[i].getPath())));
 			nuevoBoton.setName(carpetaLibros.listFiles()[i].getPath());
-			nuevoBoton.setMaximumSize(new Dimension(200, 15));
+			nuevoBoton.setMaximumSize(new Dimension(155, 16));
 			nuevoBoton.addActionListener(listenerBotonRuta);
 			this.panelInicio.getPanelResultado().add(nuevoBoton);
 		}

@@ -37,7 +37,9 @@ public class PanelLectura extends JPanel{
 	private JLabel numeroPaginaCuandoMarcada;
 	private JLabel numeroPaginaMarcadaIzq;
 	public PanelLectura() {
-		setMinimumSize(new Dimension(650, 500));
+		setBackground(Color.BLACK);
+		setMaximumSize(new Dimension(700, 500));
+		setMinimumSize(new Dimension(700, 500));
 		setLayout(null);
 		
 		tituloLibro = new JLabel("Titulo Libro");

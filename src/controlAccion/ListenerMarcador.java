@@ -94,7 +94,9 @@ public class ListenerMarcador implements ActionListener{
 	 * 
 	 */
 	private void guardarPaginaMarcadaEnLogica() {
-		this.logica.setPaginaMarcada(Integer.valueOf(this.panelLectura.getNumeroPaginaDer().getText()).intValue());
+		if(Integer.valueOf(this.panelLectura.getNumeroPaginaDer().getText()).intValue()!=this.logica.getPaginaMarcada())
+			this.logica.setPaginaMarcada(Integer.valueOf(this.panelLectura.getNumeroPaginaDer().getText()).intValue());
+		else this.logica.setPaginaMarcada(0);
 	}
 
 	/**

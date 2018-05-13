@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Insets;
+import javax.swing.SwingConstants;
 
 public class PanelInicio extends JPanel{
 	private JTextField txtElHobbit;
@@ -22,12 +23,15 @@ public class PanelInicio extends JPanel{
 	private JPanel panelImagen;
 	
 	public PanelInicio() {
-		this.setLayout(new BorderLayout(0, 0));
+		setBackground(Color.BLACK);
+		setMaximumSize(new Dimension(700, 500));
+		setLayout(null);
 		
 		panelTitulo = new JPanel();
+		panelTitulo.setBounds(0, 0, 700, 33);
 		panelTitulo.setForeground(Color.ORANGE);
 		panelTitulo.setBackground(Color.BLACK);
-		this.add(panelTitulo, BorderLayout.NORTH);
+		this.add(panelTitulo);
 		
 		titulo = new JLabel("LECTOR DE LIBROS");
 		titulo.setForeground(Color.ORANGE);
@@ -35,15 +39,26 @@ public class PanelInicio extends JPanel{
 		panelTitulo.add(titulo);
 		
 		JPanel panel = new JPanel();
-		this.add(panel, BorderLayout.WEST);
+		panel.setBounds(0, 33, 155, 445);
+		panel.setMinimumSize(new Dimension(155, 10));
+		panel.setMaximumSize(new Dimension(155, 55300));
+		this.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelBusqueda = new JPanel();
+		panelBusqueda.setPreferredSize(new Dimension(155, 70));
+		panelBusqueda.setSize(new Dimension(155, 100));
+		panelBusqueda.setMinimumSize(new Dimension(155, 10));
+		panelBusqueda.setMaximumSize(new Dimension(155, 32767));
 		panelBusqueda.setBackground(Color.BLACK);
 		panel.add(panelBusqueda, BorderLayout.NORTH);
-		panelBusqueda.setLayout(new BoxLayout(panelBusqueda, BoxLayout.Y_AXIS));
+		panelBusqueda.setLayout(null);
 		
 		JLabel lblNombreDeLibro = new JLabel("Nombre de libro");
+		lblNombreDeLibro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombreDeLibro.setBounds(0, 0, 155, 16);
+		lblNombreDeLibro.setMinimumSize(new Dimension(155, 14));
+		lblNombreDeLibro.setMaximumSize(new Dimension(155, 14));
 		lblNombreDeLibro.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNombreDeLibro.setOpaque(true);
 		lblNombreDeLibro.setForeground(Color.LIGHT_GRAY);
@@ -51,6 +66,9 @@ public class PanelInicio extends JPanel{
 		panelBusqueda.add(lblNombreDeLibro);
 		
 		txtElHobbit = new JTextField();
+		txtElHobbit.setBounds(0, 16, 155, 17);
+		txtElHobbit.setMinimumSize(new Dimension(155, 20));
+		txtElHobbit.setMaximumSize(new Dimension(155, 150));
 		txtElHobbit.setMargin(new Insets(0, 0, 0, 2));
 		txtElHobbit.setBackground(Color.DARK_GRAY);
 		txtElHobbit.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -60,11 +78,18 @@ public class PanelInicio extends JPanel{
 		txtElHobbit.setColumns(10);
 		
 		JLabel lblRutaDeBusqueda = new JLabel("Ruta de busqueda");
+		lblRutaDeBusqueda.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRutaDeBusqueda.setBounds(0, 33, 155, 15);
+		lblRutaDeBusqueda.setMinimumSize(new Dimension(155, 14));
+		lblRutaDeBusqueda.setMaximumSize(new Dimension(155, 14));
 		lblRutaDeBusqueda.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblRutaDeBusqueda.setForeground(Color.LIGHT_GRAY);
 		panelBusqueda.add(lblRutaDeBusqueda);
 		
 		txtCuserstuusuarioalgoalgo = new JTextField();
+		txtCuserstuusuarioalgoalgo.setBounds(0, 48, 155, 16);
+		txtCuserstuusuarioalgoalgo.setMinimumSize(new Dimension(155, 20));
+		txtCuserstuusuarioalgoalgo.setMaximumSize(new Dimension(155, 2147483647));
 		txtCuserstuusuarioalgoalgo.setMargin(new Insets(0, 0, 0, 0));
 		txtCuserstuusuarioalgoalgo.setBackground(Color.DARK_GRAY);
 		txtCuserstuusuarioalgoalgo.setCaretColor(Color.DARK_GRAY);
@@ -75,20 +100,30 @@ public class PanelInicio extends JPanel{
 		txtCuserstuusuarioalgoalgo.setColumns(10);
 		
 		panelResultado = new JPanel();
+		panelResultado.setPreferredSize(new Dimension(10, 500));
+		panelResultado.setMinimumSize(new Dimension(155, 10));
+		panelResultado.setMaximumSize(new Dimension(155, 32767));
 		panelResultado.setBackground(Color.BLACK);
 		panelResultado.setAutoscrolls(true);
 		panel.add(panelResultado, BorderLayout.CENTER);
 		panelResultado.setLayout(new BoxLayout(panelResultado, BoxLayout.Y_AXIS));
 		
 		panelImagen = new JPanel();
+		panelImagen.setBounds(201, 33, 499, 445);
+		panelImagen.setMaximumSize(new Dimension(999, 32767));
+		panelImagen.setMinimumSize(new Dimension(480, 400));
 		panelImagen.setBackground(Color.BLACK);
-		this.add(panelImagen, BorderLayout.CENTER);
-		panelImagen.setLayout(new BoxLayout(panelImagen, BoxLayout.X_AXIS));
+		this.add(panelImagen);
 		ImageIcon imagen = new ImageIcon("img/fondo.jpg");
+		panelImagen.setLayout(new BoxLayout(panelImagen, BoxLayout.X_AXIS));
 		JLabel labelImagen = new JLabel(imagen);
+		labelImagen.setHorizontalTextPosition(SwingConstants.LEADING);
+		labelImagen.setHorizontalAlignment(SwingConstants.LEADING);
+		labelImagen.setSize(new Dimension(480, 400));
+		labelImagen.setPreferredSize(new Dimension(480, 400));
 		labelImagen.setBackground(Color.BLACK);
-		labelImagen.setMinimumSize(new Dimension(200, 200));
-		labelImagen.setMaximumSize(new Dimension(1000, 700));
+		labelImagen.setMinimumSize(new Dimension(480, 400));
+		labelImagen.setMaximumSize(new Dimension(980, 400));
 		panelImagen.add(labelImagen);
 	}
 
