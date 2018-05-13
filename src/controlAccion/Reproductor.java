@@ -10,17 +10,23 @@ import javax.swing.SwingWorker;
 import javazoom.jl.player.Player;
 
 public class Reproductor implements ActionListener{
-
+	private boolean sonando = false;
+	private SwingWorker worker;
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		SwingWorker<Object, Object> worker=  new SwingWorker<Object, Object>(){
-			@Override
-			protected Object doInBackground() throws Exception {
-				reproducirAudio("audios/TheHobbit.mp3");
-				return null;
-			}
-		};	
+		if(!sonando) {
+			worker=  new SwingWorker<Object, Object>(){
+				@Override
+				protected Object doInBackground() throws Exception {
+					reproducirAudio("audios/TheHobbit.mp3");
+					return null;
+				}
+			};	
 			worker.execute();
+			sonando = true;
+		}
+		else worker.cancel(true);
+		//No consigo cerrar el worker :/
 	}
 	private void reproducirAudio(String ruta) {
 		try {
