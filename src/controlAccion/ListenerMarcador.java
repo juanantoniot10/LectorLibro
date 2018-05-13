@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import controlLogica.Logica;
 import javazoom.jl.player.Player;
 import vita.PanelLectura;
 
@@ -12,27 +14,87 @@ public class ListenerMarcador implements ActionListener{
 	
 	private PanelLectura panelLectura;
 	private Actualizador actualizador;
+	private Logica logica;
 	
-	public ListenerMarcador(PanelLectura panelLectura,Actualizador actualizador) {
+	public ListenerMarcador(PanelLectura panelLectura,Actualizador actualizador,Logica logica) {
 		super();
 		this.panelLectura = panelLectura;
 		this.actualizador = actualizador;
+		this.logica = logica;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(((ImageIcon)((JLabel)this.panelLectura.getPanelImagen().getComponents()[0]).getIcon()).getImage().equals(((ImageIcon)((JLabel)this.panelLectura.getImagenMarcar()).getIcon()).getImage())){
-			this.panelLectura.getPanelImagen().removeAll();
-			this.panelLectura.getPanelImagen().add(this.panelLectura.getImagenNormal());
-			reproducirAudio("audios/desmarcarPagina.mp3");
+		marcarPagina();
+	}
+
+	/**
+	 * 
+	 */
+	private void marcarPagina() {
+		if(comprobarImagenActual()){
+			desmarcar();
 		}
 		else {
-			this.panelLectura.getPanelImagen().removeAll();
-			this.panelLectura.getPanelImagen().add(this.panelLectura.getImagenMarcar());
-			reproducirAudio("audios/marcarPagina.mp3");
+			marcar();
 		}
-		
+		guardarPaginaMarcadaEnLogica();
+		cambiarVisivilidadNumeroPagina();
+		cambiarVisivilidadNumeroPaginaCuandoMarcada();
 		this.actualizador.actualizar();
+	}
+
+	/**
+	 * @return
+	 */
+	private boolean comprobarImagenActual() {
+		return ((ImageIcon)((JLabel)this.panelLectura.getPanelImagen().getComponents()[0]).getIcon()).getImage().equals(((ImageIcon)((JLabel)this.panelLectura.getImagenMarcar()).getIcon()).getImage());
+	}
+
+	/**
+	 * 
+	 */
+	private void marcar() {
+		anadirImagen(this.panelLectura.getImagenMarcar());
+		reproducirAudio("audios/marcarPagina.mp3");
+	}
+
+	/**
+	 * 
+	 */
+	private void desmarcar() {
+		anadirImagen(this.panelLectura.getImagenNormal());
+		reproducirAudio("audios/desmarcarPagina.mp3");
+	}
+
+	/**
+	 * @param imagen 
+	 * 
+	 */
+	private void anadirImagen(JLabel imagen) {
+		this.panelLectura.getPanelImagen().removeAll();
+		this.panelLectura.getPanelImagen().add(imagen);
+	}
+
+	/**
+	 * 
+	 */
+	private void cambiarVisivilidadNumeroPaginaCuandoMarcada() {
+		this.panelLectura.getNumeroPaginaCuandoMarcada().setVisible(!this.panelLectura.getNumeroPaginaCuandoMarcada().isVisible());
+	}
+
+	/**
+	 * 
+	 */
+	private void cambiarVisivilidadNumeroPagina() {
+		this.panelLectura.getNumeroPaginaDer().setVisible(!this.panelLectura.getNumeroPaginaDer().isVisible());
+	}
+
+	/**
+	 * 
+	 */
+	private void guardarPaginaMarcadaEnLogica() {
+		this.logica.setPaginaMarcada(Integer.valueOf(this.panelLectura.getNumeroPaginaDer().getText()).intValue());
 	}
 
 	/**

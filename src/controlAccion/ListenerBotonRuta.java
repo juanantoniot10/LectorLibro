@@ -19,8 +19,7 @@ public class ListenerBotonRuta implements ActionListener{
 	private PanelLectura panelLectura;
 	private ListenerMarcador listenerMarcarPagina;
 	private ListenerRetroceso listenerRetroceso;
-	private ListenerAvanzarPagina avanzarPagina;
-	private ListenerRetrocederPagina retrocederPagina;
+	private ListenerAvanzarPagina cambiarPagina;
 	
 	
 	public ListenerBotonRuta(Logica logica, Actualizador actualizador,PanelInicio panelInicio,
@@ -30,14 +29,15 @@ public class ListenerBotonRuta implements ActionListener{
 		this.actualizador = actualizador;
 		this.panelInicio = panelInicio;
 		this.panelLectura = panelLectura;
-		this.listenerMarcarPagina = new ListenerMarcador(panelLectura, actualizador);
+		this.listenerMarcarPagina = new ListenerMarcador(panelLectura, actualizador, logica);
 		this.listenerRetroceso = new ListenerRetroceso(panelInicio,actualizador,panelLectura);
 		this.panelLectura.getMarcarPagina().addActionListener(listenerMarcarPagina);
 		this.panelLectura.getSalir().addActionListener(listenerRetroceso);
-		this.avanzarPagina = new ListenerAvanzarPagina(this.panelLectura,actualizador,logica);
-		this.panelLectura.getAvanzarPagina().addActionListener(avanzarPagina);
-		this.retrocederPagina = new ListenerRetrocederPagina(panelLectura, actualizador, logica);
-		this.panelLectura.getRetrocederPagina().addActionListener(retrocederPagina);
+		this.cambiarPagina = new ListenerAvanzarPagina(this.panelLectura,actualizador,logica);
+		this.panelLectura.getAvanzarPagina().addActionListener(cambiarPagina);
+		this.panelLectura.getRetrocederPagina().addActionListener(cambiarPagina);
+		this.panelLectura.getRetrocederPaginax10().addActionListener(cambiarPagina);
+		this.panelLectura.getAvanzarPaginax10().addActionListener(cambiarPagina);
 	}
 
 	@Override

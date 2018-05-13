@@ -10,6 +10,7 @@ public class Logica {
 	private ImageIcon imagenLibroNormal;
 	private String palabraPartidaFinal="";
 	private File ruta;
+	private int paginaMarcada = 0;
 	
 	public Logica() {
 		super();
@@ -92,7 +93,7 @@ public class Logica {
 	}
 
 	private String reemplazarSaltosDeLinea(String generearPaginaSegunPalabraPartida) {
-		return new String(generearPaginaSegunPalabraPartida.replaceAll("\r", ".").replaceAll("\n", " "));
+		return new String(generearPaginaSegunPalabraPartida.replaceAll("\r", "").replaceAll("\n", " "));
 	}
 
 	/**
@@ -130,6 +131,14 @@ public class Logica {
 
 	public void setRuta(File ruta) {
 		this.ruta = ruta;
+	}
+
+	public int getPaginaMarcada() {
+		return paginaMarcada;
+	}
+
+	public void setPaginaMarcada(int paginaMarcada) {
+		this.paginaMarcada = paginaMarcada;
 	}
 	
 }

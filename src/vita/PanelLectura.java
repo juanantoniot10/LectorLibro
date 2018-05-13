@@ -4,6 +4,10 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,12 +27,15 @@ public class PanelLectura extends JPanel{
 	private JButton avanzarPagina;
 	private JButton salir;
 	private JLabel imagenNormal;
+	private JLabel imagenIzquierda;
 	private JLabel imagenMarcar;
 	private JButton botonMusica;
 	private JLabel numeroPaginaDer;
 	private JLabel numeroPaginaIzq;
 	private JTextPane textPaneLeft;
 	private JTextPane textPaneDer;
+	private JLabel numeroPaginaCuandoMarcada;
+	private JLabel numeroPaginaMarcadaIzq;
 	public PanelLectura() {
 		setMinimumSize(new Dimension(650, 500));
 		setLayout(null);
@@ -51,6 +58,13 @@ public class PanelLectura extends JPanel{
 		imagenMarcar.setMaximumSize(new Dimension(612, 419));
 		imagenMarcar.setName("marcar");
 		
+		ImageIcon imagenIzquier = new ImageIcon("img/marcarPaginaIzq.jpg");
+		imagenIzquierda = new JLabel(imagenIzquier);
+		imagenIzquierda.setBounds(0, 0, 665, 415);
+		imagenIzquierda.setMinimumSize(new Dimension(612, 419));
+		imagenIzquierda.setMaximumSize(new Dimension(612, 419));
+		imagenIzquierda.setName("izq");
+		
 		JPanel panelBotones = new JPanel();
 		panelBotones.setBounds(0, 22, 73, 415);
 		panelBotones.setBackground(Color.BLACK);
@@ -59,7 +73,8 @@ public class PanelLectura extends JPanel{
 		add(panelBotones);
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
 		
-		retrocederPaginax10 = new JButton("X10");
+		retrocederPaginax10 = new JButton("20");
+		retrocederPaginax10.setName("-20");
 		retrocederPaginax10.setToolTipText("Rereocede diez paginas\r\n");
 		retrocederPaginax10.setIcon(new ImageIcon(PanelLectura.class.getResource("/com/sun/javafx/scene/web/skin/DecreaseIndent_16x16_JFX.png")));
 		retrocederPaginax10.setMinimumSize(new Dimension(90, 20));
@@ -67,6 +82,7 @@ public class PanelLectura extends JPanel{
 		panelBotones.add(retrocederPaginax10);
 		
 		retrocederPagina = new JButton("");
+		retrocederPagina.setName("-2");
 		retrocederPagina.setToolTipText("retrocede 1 pagina");
 		retrocederPagina.setMaximumSize(new Dimension(90, 40));
 		retrocederPagina.setMinimumSize(new Dimension(90, 20));
@@ -88,13 +104,15 @@ public class PanelLectura extends JPanel{
 		panelBotones.add(irPaginaMarcada);
 		
 		avanzarPagina = new JButton("");
+		avanzarPagina.setName("2");
 		avanzarPagina.setToolTipText("avanzar pagina");
 		avanzarPagina.setMinimumSize(new Dimension(90, 20));
 		avanzarPagina.setMaximumSize(new Dimension(90, 40));
 		avanzarPagina.setIcon(new ImageIcon(PanelLectura.class.getResource("/com/sun/javafx/scene/web/skin/IncreaseIndent_16x16_JFX.png")));
 		panelBotones.add(avanzarPagina);
 		
-		avanzarPaginax10 = new JButton("X10");
+		avanzarPaginax10 = new JButton("20");
+		avanzarPaginax10.setName("20");
 		avanzarPaginax10.setToolTipText("avanzar diez paginas");
 		avanzarPaginax10.setIcon(new ImageIcon(PanelLectura.class.getResource("/com/sun/javafx/scene/web/skin/IncreaseIndent_16x16_JFX.png")));
 		avanzarPaginax10.setMinimumSize(new Dimension(90, 20));
@@ -129,10 +147,26 @@ public class PanelLectura extends JPanel{
 		numeroPaginaDer.setFont(new Font("Tahoma", Font.BOLD, 12));
 		numeroPaginaDer.setForeground(Color.BLACK);
 		
+		numeroPaginaCuandoMarcada = new JLabel("4");
+		numeroPaginaCuandoMarcada.setVisible(false);
+		
+		numeroPaginaMarcadaIzq = new JLabel("0");
+		numeroPaginaMarcadaIzq.setVisible(false);
+		numeroPaginaMarcadaIzq.setHorizontalAlignment(SwingConstants.CENTER);
+		numeroPaginaMarcadaIzq.setForeground(Color.BLACK);
+		numeroPaginaMarcadaIzq.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numeroPaginaMarcadaIzq.setBounds(140, 386, 34, 22);
+		add(numeroPaginaMarcadaIzq);
+		numeroPaginaCuandoMarcada.setHorizontalAlignment(SwingConstants.CENTER);
+		numeroPaginaCuandoMarcada.setForeground(Color.BLACK);
+		numeroPaginaCuandoMarcada.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numeroPaginaCuandoMarcada.setBounds(638, 386, 34, 22);
+		add(numeroPaginaCuandoMarcada);
+		
 		textPaneLeft = new JTextPane();
 		textPaneLeft.setOpaque(false);
 		textPaneLeft.setBounds(156, 61, 240, 322);
-		textPaneLeft.setText("Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuegoHabia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego Habia una vez un enano con un anillo El maldito enano va a tardar 2000 paginas en tirarlo al fuego");
+		textPaneLeft.setText("si lees esto algo va mal");
 		add(textPaneLeft);
 		
 		textPaneDer = new JTextPane();
@@ -153,6 +187,7 @@ public class PanelLectura extends JPanel{
 		imagenNormal.setMaximumSize(new Dimension(612, 419));
 		panelImagen.add(imagenNormal);
 		imagenNormal.setName("marcar");
+		
 	}
 	public JLabel getTituloLibro() {
 		return tituloLibro;
@@ -201,6 +236,18 @@ public class PanelLectura extends JPanel{
 	}
 	public JTextPane getTextPaneDer() {
 		return textPaneDer;
+	}
+	public JLabel getNumeroPaginaCuandoMarcada() {
+		return numeroPaginaCuandoMarcada;
+	}
+	public void setNumeroPaginaCuandoMarcada(JLabel numeroPaginaCuandoMarcada) {
+		this.numeroPaginaCuandoMarcada = numeroPaginaCuandoMarcada;
+	}
+	public JLabel getImagenIzquierda() {
+		return imagenIzquierda;
+	}
+	public JLabel getNumeroPaginaMarcadaIzq() {
+		return numeroPaginaMarcadaIzq;
 	}
 	
 }
