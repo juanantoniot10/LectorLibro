@@ -3,6 +3,9 @@ package controlAccion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,6 +32,23 @@ public class CambiarPagina implements ActionListener{
 		int paginaUno;
 		int paginaDos;
 		if(isIrAPaginaMarcada(e)) {
+//			if(logica.getRutaMarca().exists()) {
+//				String numeroPaginaMarcada = "";
+//				try {
+//					FileReader flujoR = new FileReader(logica.getRutaMarca());
+//					int leido = flujoR.read();
+//					while(flujoR.read()!=-1) {
+//						numeroPaginaMarcada = numeroPaginaMarcada + leido;
+//					}
+//					logica.setPaginaMarcada(Integer.valueOf(numeroPaginaMarcada).intValue());
+//					flujoR.close();
+//				} catch (FileNotFoundException e) {
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//				
+//			}
 			paginaUno = this.logica.getPaginaMarcada()-1;
 			paginaDos = this.logica.getPaginaMarcada();
 		}

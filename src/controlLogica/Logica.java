@@ -1,7 +1,9 @@
 package controlLogica;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import utiles.Constantes;
@@ -10,10 +12,13 @@ public class Logica {
 	private ImageIcon imagenLibroNormal;
 	private File ruta;
 	private int paginaMarcada = -1;
+	private File rutaMarca;
 	
+
 	public Logica() {
 		super();
 		this.imagenLibroNormal = generarImagen();
+		
 	}
 
 	private ImageIcon generarImagen() {
@@ -109,9 +114,40 @@ public class Logica {
 	public int getPaginaMarcada() {
 		return paginaMarcada;
 	}
+	public File getRutaMarca() {
+		return rutaMarca;
+	}
+
+	public void setRutaMarca(File rutaMarca) {
+		this.rutaMarca = rutaMarca;
+	}
+
+	public File getRuta() {
+		return ruta;
+	}
 
 	public void setPaginaMarcada(int paginaMarcada) {
 		this.paginaMarcada = paginaMarcada;
+		if(rutaMarca.exists()) {
+			try {
+				FileWriter flujoR = new FileWriter(rutaMarca);
+				flujoR.write(paginaMarcada);
+				flujoR.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				rutaMarca.createNewFile();
+				FileWriter flujoR = new FileWriter(rutaMarca);
+				flujoR.write(paginaMarcada);
+				flujoR.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 }

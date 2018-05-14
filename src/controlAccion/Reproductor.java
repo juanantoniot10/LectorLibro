@@ -12,6 +12,7 @@ import javazoom.jl.player.Player;
 public class Reproductor implements ActionListener{
 	private boolean sonando = false;
 	private SwingWorker worker;
+	private Player reproductor;
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(!sonando) {
@@ -25,12 +26,14 @@ public class Reproductor implements ActionListener{
 			worker.execute();
 			sonando = true;
 		}
-		else worker.cancel(true);
-		//No consigo cerrar el worker :/
+		else {
+			reproductor.close();
+			sonando = false;
+		}
 	}
 	private void reproducirAudio(String ruta) {
 		try {
-			Player reproductor = new Player(new FileInputStream(String.valueOf(ruta)));
+			reproductor = new Player(new FileInputStream(String.valueOf(ruta)));
 			reproductor.play();
 			}
 		catch (Exception tipoerror) {

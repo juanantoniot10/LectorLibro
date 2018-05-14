@@ -36,6 +36,8 @@ public class PanelLectura extends JPanel{
 	private JTextPane textPaneDer;
 	private JLabel numeroPaginaCuandoMarcada;
 	private JLabel numeroPaginaMarcadaIzq;
+	private JButton btnLeeParaMi;
+	
 	public PanelLectura() {
 		setBackground(Color.BLACK);
 		setMaximumSize(new Dimension(700, 500));
@@ -128,6 +130,14 @@ public class PanelLectura extends JPanel{
 		botonMusica.setMinimumSize(new Dimension(90, 20));
 		botonMusica.setMaximumSize(new Dimension(90, 40));
 		panelBotones.add(botonMusica);
+		
+		btnLeeParaMi = new JButton("");
+		btnLeeParaMi.setIcon(new ImageIcon(PanelLectura.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaMuteDisabled.png")));
+		btnLeeParaMi.setToolTipText("avanzar diez paginas");
+		btnLeeParaMi.setName("20");
+		btnLeeParaMi.setMinimumSize(new Dimension(90, 20));
+		btnLeeParaMi.setMaximumSize(new Dimension(90, 40));
+		panelBotones.add(btnLeeParaMi);
 		
 		salir = new JButton("");
 		salir.setMinimumSize(new Dimension(90, 9));
@@ -251,6 +261,9 @@ public class PanelLectura extends JPanel{
 	}
 	public JLabel getNumeroPaginaMarcadaIzq() {
 		return numeroPaginaMarcadaIzq;
+	}
+	public JButton getBtnLeeParaMi() {
+		return btnLeeParaMi;
 	}
 	
 }

@@ -2,7 +2,12 @@ package controlAccion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -66,6 +71,7 @@ public class ListenerMarcador implements ActionListener{
 	private void marcar() {
 		anadirImagen(this.panelLectura.getImagenMarcar());
 		reproducirAudio("audios/marcarPagina.mp3");
+		this.logica.setRutaMarca(new File("datos/"+logica.extraerTitulo(String.valueOf(logica.getRuta()))));
 		this.logica.setPaginaMarcada(Integer.valueOf(this.panelLectura.getNumeroPaginaDer().getText()).intValue());
 	}
 
